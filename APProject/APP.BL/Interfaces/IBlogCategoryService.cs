@@ -11,26 +11,26 @@
     internal interface IBlogCategoryService
     {
         /// <summary>
-        ///     Получить все категории.
+        ///     Получить все категории блога.
         /// </summary>
         /// <returns></returns>
         Task<OffsetEntitiesDto> GetCategoriesAsync(int offset, int count);
 
         /// <summary>
-        ///     Получить категорию по идентификатору.
+        ///     Получить категорию блога по идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
         Task<OffsetEntitiesDto> GetCategoryById(long id);
 
         /// <summary>
-        ///     Создать категорию.
+        ///     Создать категорию блога.
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddCategory(BlogArticlesDto articlesDto);
+        Task<Result> AddCategory();
 
         /// <summary>
-        ///     Удалить категории по идентификаторам.
+        ///     Удалить категории блога по идентификаторам.
         /// </summary>
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
