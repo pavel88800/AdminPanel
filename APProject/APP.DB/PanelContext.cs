@@ -1,13 +1,17 @@
-﻿using APP.DB.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace APP.DB
+﻿namespace APP.DB
 {
+    using APP.DB.Models;
+    using Microsoft.EntityFrameworkCore;
+
     /// <summary>
     ///     Контекст Админ-панели.
     /// </summary>
     public class PanelContext : DbContext
     {
+        public PanelContext(DbContextOptions options) : base(options)
+        {
+        }
+
         /// <summary>
         ///     Статьи.
         /// </summary>
@@ -45,7 +49,8 @@ namespace APP.DB
 
         /// <summary>
         ///     Товары.
-        /// </summary>создла
+        /// </summary>
+        /// создла
         public DbSet<Product> Products { get; set; }
 
         /// <summary>
@@ -53,12 +58,18 @@ namespace APP.DB
         /// </summary>
         public DbSet<Review> Reviews { get; set; }
 
-        public PanelContext(DbContextOptions options) : base(options)
-        {
-        }
+        /// <summary>
+        ///     Покупатели.
+        /// </summary>
+        public DbSet<Customer> Customers { get; set; }
 
         /// <summary>
-        /// Инициализация контекста.
+        ///     Заказы.
+        /// </summary>
+        public DbSet<Order> Orders { get; set; }
+
+        /// <summary>
+        ///     Инициализация контекста.
         /// </summary>
         public void Init()
         {

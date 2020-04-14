@@ -29,47 +29,25 @@ namespace APP.BL.Services
         /// <inheritdoc />
         public Task<OffsetEntitiesDto> GetBlogArticleAsync(int offset, int count)
         {
-            var result = GetPagesAsync(offset, count);
-            return result;
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public async Task<OffsetEntitiesDto> GetBlogArticleById(long id)
         {
-            var result = await GetItemById(id);
-            return new OffsetEntitiesDto{Entities = result};
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public async Task<Result> AddBlogArticle(BlogArticlesDto articlesDto)
         {
-            try
-            {
-                var article = BlogArticlesDtoBlogArticlesMapping.TransformBlogArticlesDtoToBlogArticles(articlesDto);
-                await _context.AddAsync(article);
-                await _context.SaveChangesAsync();
-                return Result.Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public Result DeleteBlogArticle(List<long> ids)
         {
-            try
-            {
-                DeleteItems(ids);
-                return Result.Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            throw new Exception();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APP.BL.Dto
+﻿namespace APP.BL.Dto
 {
     public class OffsetEntitiesDto
     {
