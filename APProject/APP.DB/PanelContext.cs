@@ -56,5 +56,20 @@ namespace APP.DB
         public PanelContext(DbContextOptions options) : base(options)
         {
         }
+
+        /// <summary>
+        /// Инициализация контекста.
+        /// </summary>
+        public void Init()
+        {
+            Database.Migrate();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
     }
 }
