@@ -5,7 +5,7 @@
     using APP.BL.Dto;
     using APP.Models.Results;
 
-    internal interface IProductService
+    public interface IProductService
     {
         /// <summary>
         ///     Получить все товары.
@@ -18,13 +18,13 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetProductById(long id);
+        Task<Result> GetProductById(long id);
 
         /// <summary>
         ///     Создать товар.
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddProduct();
+        Task<Result> AddProduct(ProductDto productDto);
 
         /// <summary>
         ///     Удалить товары по идентификаторам.

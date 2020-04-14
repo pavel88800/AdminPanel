@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetCustomerById(long id);
+        Task<Result> GetCustomerById(long id);
 
         /// <summary>
         ///     Создать категорию .

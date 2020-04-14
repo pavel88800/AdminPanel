@@ -5,7 +5,7 @@ namespace APP.BL.Dto
     /// <summary>
     ///     Dto для выдачи метаданных меню.
     /// </summary>
-    public class DtoMetaMainMenu
+    public class MetaMainMenuDto
     {
         /// <summary>
         ///     Список Главного меню

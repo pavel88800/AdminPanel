@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetOrderById(long id);
+        Task<Result> GetOrderById(long id);
 
         /// <summary>
         ///     Создать заказ .

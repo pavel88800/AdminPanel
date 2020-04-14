@@ -21,7 +21,7 @@ namespace APP.BL.Interfaces
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<ArticlesDto> GetArtcileById(long id);
+        Task<Result> GetArtcileById(long id);
 
         /// <summary>
         ///     Создать статью.

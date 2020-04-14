@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetBlogRewiewById(long id);
+        Task<Result> GetBlogRewiewById(long id);
 
         /// <summary>
         ///     Создать отзыв блога.

@@ -24,16 +24,16 @@ namespace APP.BL.Dto
         /// <summary>
         ///     Категории блога.
         /// </summary>
-        public BlogCategory BlogCategory { get; set; }
+        public long BlogCategoryId { get; set; }
 
         /// <summary>
         ///     Список рекомендуемых статей.
         /// </summary>
-        public List<BlogArticle> BlogArticles { get; set; }
+        public long[] BlogArticlesId { get; set; }
 
         /// <summary>
         ///     Список рекомендуемых продуктов.
         /// </summary>
-        public List<Product> RecomendedProducts { get; set; }
+        public long[] RecomendedProductsId { get; set; }
     }
 }

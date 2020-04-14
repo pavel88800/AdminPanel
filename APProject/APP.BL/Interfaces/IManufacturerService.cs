@@ -20,7 +20,7 @@ namespace APP.BL.Interfaces
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetManufacturerById(long id);
+        Task<Result> GetManufacturerById(long id);
 
         /// <summary>
         ///     Создать производителя .

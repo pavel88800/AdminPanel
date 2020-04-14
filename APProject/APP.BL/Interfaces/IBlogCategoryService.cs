@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetCategoryById(long id);
+        Task<Result> GetCategoryById(long id);
 
         /// <summary>
         ///     Создать категорию блога.

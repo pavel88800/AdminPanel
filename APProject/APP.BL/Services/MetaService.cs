@@ -31,7 +31,7 @@
             var listMainMenu = mainMenu.Select(x => x.Value);
             var listBlogMenu = blogMenu.Select(x => x.Value);
 
-            var metaResult = new DtoMetaMainMenu
+            var metaResult = new MetaMainMenuDto
             {
                 BlogMenu = listBlogMenu,
                 CatalogMenu = listMainMenu

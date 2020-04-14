@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetReviewById(long id);
+        Task<Result> GetReviewById(long id);
 
         /// <summary>
         ///     Создать отзыв.

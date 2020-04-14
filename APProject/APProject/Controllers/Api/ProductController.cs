@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class BlogArticlesController : BaseApiController
+    public class ProductController : BaseApiController
     {
-        private readonly IBlogArticleService _blogArticleService;
+        private readonly IProductService _productService;
 
         /// <summary>
         ///     Контроллер.
         /// </summary>
         /// <param name="articleService"></param>
-        public BlogArticlesController(IBlogArticleService blogArticleService)
+        public ProductController(IProductService productService)
         {
-            _blogArticleService = blogArticleService;
+            _productService = productService;
         }
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace APProject.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<object> GetBlogArticleAsync(int offset, int count)
+        public async Task<object> GetProduct(int offset, int count)
         {
-            var result = await _blogArticleService.GetBlogArticleAsync(offset, count);
+            var result = await _productService.GetProductAsync(offset, count);
             return result.Entities;
         }
 
@@ -38,9 +38,9 @@ namespace APProject.Controllers.Api
         /// <returns></returns>
         [HttpGet]
         [Route("id")]
-        public async Task<IActionResult> GetBlogArticleById(long id)
+        public async Task<IActionResult> GetProductById(long id)
         {
-            var result = await _blogArticleService.GetBlogArticleById(id);
+            var result = await _productService.GetProductById(id);
             return Ok(result);
         }
 
@@ -50,9 +50,9 @@ namespace APProject.Controllers.Api
         /// <param name="articlesDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddBlogArticle([FromForm]BlogArticlesDto articlesDto)
+        public async Task<IActionResult> AddProduct([FromForm]ProductDto productDto)
         {
-            var result = await _blogArticleService.AddBlogArticle(articlesDto);
+            var result = await _productService.AddProduct(productDto);
             return Ok(result);
         }
 
@@ -62,9 +62,9 @@ namespace APProject.Controllers.Api
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpDelete]
-        public IActionResult DeleteBlogArticle(List<long> ids)
+        public IActionResult DeleteProduct(List<long> ids)
         {
-            var result = _blogArticleService.DeleteBlogArticle(ids);
+            var result = _productService.DeleteProduct(ids);
             return Ok(result);
         }
     }
