@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using APP.BL.Dto;
-using APP.BL.Interfaces;
-using APP.BL.Mapping;
-using APP.DB;
-using APP.DB.Models;
-using APP.Models.Results;
-
-namespace APP.BL.Services
+﻿namespace APP.BL.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using APP.BL.Dto;
+    using APP.BL.Interfaces;
+    using APP.DB;
+    using APP.DB.Models;
+    using APP.Models.Results;
+
     /// <summary>
     ///     Сервис для работы с <see cref="BlogArticle" />
     /// </summary>
