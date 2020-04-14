@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using APP.BL.Dto;
 using APP.BL.Interfaces;
@@ -31,31 +32,25 @@ namespace APP.BL.Services
         /// <inheritdoc />
         public async Task<OffsetEntitiesDto> GetArticlesAsync(int offset, int count)
         {
-            return await GetPagesAsync(offset, count);
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public async Task<ArticlesDto> GetArtcileById(long id)
         {
-            var result = await GetItemById(id);
-            return ArticleDtoArticleMapping.MapArticlesToArticlesDto(result);
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public async Task<Result> AddArticle(ArticlesDto articlesDto)
         {
-            var article = ArticleDtoArticleMapping.MapArticlesDtoToArticles(articlesDto);
-
-            await _context.AddAsync(article);
-            await _context.SaveChangesAsync();
-            return Result.Ok();
+            throw new Exception();
         }
 
         /// <inheritdoc />
         public Result DeleteArticles(List<long> ids)
         {
-            DeleteItems(ids);
-            return Result.Ok();
+            throw new Exception();
         }
     }
 }
