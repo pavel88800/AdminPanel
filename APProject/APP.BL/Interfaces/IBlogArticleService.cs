@@ -21,13 +21,13 @@ namespace APP.BL.Interfaces
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns>Статья</returns>
-        Task<OffsetEntitiesDto> GetBlogArticleById(long id);
+        Task<Result> GetBlogArticleById(long id);
 
         /// <summary>
         ///     Создать статью.
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddBlogArticle(BlogArticlesDto articlesDto);
+        Task<Result> AddBlogArticle(BlogArticlesDto blogArticlesDto);
 
         /// <summary>
         ///     Удалить статьи по идентификаторам.

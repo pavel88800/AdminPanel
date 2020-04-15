@@ -4,14 +4,16 @@ using APP.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace APP.DB.Migrations
 {
     [DbContext(typeof(PanelContext))]
-    partial class PanelContextModelSnapshot : ModelSnapshot
+    [Migration("20200415043725_AddCustomerOrderTable")]
+    partial class AddCustomerOrderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

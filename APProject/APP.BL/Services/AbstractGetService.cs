@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using APP.BL.Dto;
 using APP.DB;
+using APP.DB.Models;
 using APP.Models.BaseModelsEntities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace APP.BL.Services
@@ -42,7 +45,7 @@ namespace APP.BL.Services
 
             var entities = _set.Skip(offset).Take(count).ToListAsync();
 
-            return new OffsetEntitiesDto {Entities = await entities, TotalCount = totalCount};
+            return new OffsetEntitiesDto { Entities = await entities, TotalCount = totalCount };
         }
 
         /// <summary>
@@ -71,6 +74,31 @@ namespace APP.BL.Services
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        ///     Получить файл.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        protected async Task<Picture> GetFile(IFormFile file)
+        {
+            if (file != null)
+            {
+                using var memoryStream = new MemoryStream();
+                await file.CopyToAsync(memoryStream);
+                var array = memoryStream.ToArray();
+
+                var picture = new Picture
+                {
+                    Name = file.FileName,
+                    Sort = 0,
+                    Status = true,
+                    Images = array
+                };
+                return picture;
+            }
+            return new Picture();
         }
     }
 }

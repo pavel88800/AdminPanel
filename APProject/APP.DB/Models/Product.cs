@@ -11,6 +11,11 @@ namespace APP.DB.Models
     /// </summary>
     public class Product : BaseMetaInformation
     {
+        public Product()
+        {
+            RecomendedProducts = new List<ProductsProducts>();
+            Pictures = new List<ProductPicture>();
+        }
         /// <summary>
         ///     Описание.
         /// </summary>
@@ -69,7 +74,7 @@ namespace APP.DB.Models
         /// <summary>
         ///     Рекомендуемые товары.
         /// </summary>
-        public List<Product> RecomendedProducts { get; set; }
+        public List<ProductsProducts> RecomendedProducts { get; set; }
 
         /// <summary>
         ///     Главное изображение.
@@ -79,11 +84,11 @@ namespace APP.DB.Models
         /// <summary>
         ///     Изображения
         /// </summary>
-        public List<Picture> Pictures { get; set; }
+        public List<ProductPicture> Pictures { get; set; }
         
 
         /// <summary>
-        ///     Словарь коэффициентов ребер для классов дорог.
+        ///     Характеристики.
         /// </summary>
         [NotMapped]
         public Dictionary<string, string> Characteristics

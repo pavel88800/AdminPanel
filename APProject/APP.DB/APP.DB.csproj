@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200314054125_AddCharacteristicsFieldsForProduct.cs" />
-    <Compile Remove="Migrations\20200314054125_AddCharacteristicsFieldsForProduct.Designer.cs" />
-    <Compile Remove="Migrations\20200314054759_ChangeFieldProduct.cs" />
-    <Compile Remove="Migrations\20200314054759_ChangeFieldProduct.Designer.cs" />
+    <Compile Remove="Migrations\20200414102916_CreateOrderCustomerTable.cs" />
+    <Compile Remove="Migrations\20200414102916_CreateOrderCustomerTable.Designer.cs" />
+    <Compile Remove="Migrations\20200415042730_AddCustomerOrderTable.cs" />
+    <Compile Remove="Migrations\20200415042730_AddCustomerOrderTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Mapping\" />
-    <Folder Include="Relationship\" />
   </ItemGroup>
 
   <ItemGroup>
