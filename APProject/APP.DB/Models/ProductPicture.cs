@@ -4,7 +4,7 @@ using System.Text;
 
 namespace APP.DB.Models
 {
-    class ProductPicture
+    public class ProductPicture
     {
         public long ProductId { get; set; }
         public Product Product { get; set; }

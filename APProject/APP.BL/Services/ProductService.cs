@@ -50,44 +50,32 @@
                 var listPicture = productDto.Files.Select(file => GetFile(file).Result).ToList();
 
                 var manufacturer = await _context.Manufacturers.FindAsync(productDto.ManufacturerId);
-                var listRecomendedProducts = await _context.Products.Where(x => productDto.RecomendedProductsId.Contains(x.Id))
+                var listRecomendedProducts = await _context.Products
+                    .Where(x => productDto.RecomendedProductsId.Contains(x.Id))
                     .ToListAsync();
 
                 var category = await _context.Categories.FindAsync(productDto.CategoryId);
-                
-                var product = new Product
-                {
-                    Sort = productDto.Sort,
-                    Status = productDto.Status,
-                    Name = productDto.Name,
-                    Count = productDto.Count,
-                    DataEndStock = productDto.DataEndStock,
-                    DataStartStock = productDto.DataStartStock,
-                    FullDescription = productDto.FullDescription,
-                    HtmlH1 = productDto.HtmlH1,
-                    MetaDescription = productDto.MetaDescription,
-                    MetaKeywords = productDto.MetaKeywords,
-                    MetaTitle = productDto.MetaTitle,
-                    Price = productDto.Price,
-                    SmallDescription = productDto.SmallDescription,
-                    Stock = productDto.Stock,
-                    Tags = productDto.Tags,
-                    Weight = productDto.Weight,
-                    Pictures = listPicture,
-                    Picture = picture,
-                    Manufacturer = manufacturer,
-                    RecomendedProducts = listRecomendedProducts,
-                    Categories = category
-                };
+                var product = GetNewProduct(productDto, picture, manufacturer, category);
+
                 _context.Add(product);
                 _context.SaveChanges();
+
+                var productPictures = GetProductPictureList(listPicture, product);
+
+                _context.AddRange(productPictures);
+                _context.SaveChanges();
+
+                var listProductProduct = GetProductProductList(listRecomendedProducts, product);
+
+                _context.AddRange(listProductProduct);
+                _context.SaveChanges();
+
                 return Result.Ok();
             }
             catch (Exception e)
             {
                 throw new ApplicationException(e.Message);
             }
-            
         }
 
         /// <inheritdoc />
@@ -102,6 +90,93 @@
             {
                 throw new ApplicationException(e.Message);
             }
+        }
+
+        /// <summary>
+        ///     Получить объект нового проекта.
+        /// </summary>
+        /// <param name="productDto">Dto продукта.</param>
+        /// <param name="picture">Изображение.</param>
+        /// <param name="manufacturer">Производитель.</param>
+        /// <param name="category">Категория.</param>
+        /// <returns></returns>
+        private static Product GetNewProduct(ProductDto productDto, Picture picture, Manufacturer manufacturer,
+            Category category)
+        {
+            return new Product
+            {
+                Sort = productDto.Sort,
+                Status = productDto.Status,
+                Name = productDto.Name,
+                Count = productDto.Count,
+                DataEndStock = productDto.DataEndStock,
+                DataStartStock = productDto.DataStartStock,
+                FullDescription = productDto.FullDescription,
+                HtmlH1 = productDto.HtmlH1,
+                MetaDescription = productDto.MetaDescription,
+                MetaKeywords = productDto.MetaKeywords,
+                MetaTitle = productDto.MetaTitle,
+                Price = productDto.Price,
+                SmallDescription = productDto.SmallDescription,
+                Stock = productDto.Stock,
+                Tags = productDto.Tags,
+                Weight = productDto.Weight,
+                Picture = picture,
+                Manufacturer = manufacturer,
+                Categories = category
+            };
+        }
+
+        /// <summary>
+        ///     Получить объект типа ProductPicture
+        /// </summary>
+        /// <param name="listPicture">Список изображений.</param>
+        /// <param name="product">Продукт.</param>
+        /// <returns>Список ProductPicture</returns>
+        private static List<ProductPicture> GetProductPictureList(List<Picture> listPicture, Product product)
+        {
+            var productPicture = new List<ProductPicture>();
+            if (listPicture.Count > 0)
+            {
+                foreach (var pic in listPicture)
+                    productPicture.Add(new ProductPicture
+                    {
+                        Product = product,
+                        ProductId = product.Id,
+                        Picture = pic
+                    });
+
+                return productPicture;
+            }
+
+            return new List<ProductPicture>();
+        }
+
+        /// <summary>
+        ///     Получить объект типа ProductsProducts
+        /// </summary>
+        /// <param name="listRecomendedProducts">Список связанных продуктов.</param>
+        /// <param name="product">Продукт.</param>
+        /// <returns>Список ProductsProducts></returns>
+        private static List<ProductsProducts> GetProductProductList(List<Product> listRecomendedProducts,
+            Product product)
+        {
+            var productProducts = new List<ProductsProducts>();
+            if (listRecomendedProducts.Count > 0)
+            {
+                foreach (var prod in listRecomendedProducts)
+                    productProducts.Add(new ProductsProducts
+                    {
+                        Product1 = product,
+                        Product1Id = product.Id,
+                        Product2 = prod,
+                        Product2Id = prod.Id
+                    });
+
+                return productProducts;
+            }
+
+            return new List<ProductsProducts>();
         }
     }
 }

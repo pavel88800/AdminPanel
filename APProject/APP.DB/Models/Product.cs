@@ -14,6 +14,7 @@ namespace APP.DB.Models
         public Product()
         {
             RecomendedProducts = new List<ProductsProducts>();
+            Pictures = new List<ProductPicture>();
         }
         /// <summary>
         ///     Описание.
@@ -83,7 +84,7 @@ namespace APP.DB.Models
         /// <summary>
         ///     Изображения
         /// </summary>
-        public List<Picture> Pictures { get; set; }
+        public List<ProductPicture> Pictures { get; set; }
         
 
         /// <summary>

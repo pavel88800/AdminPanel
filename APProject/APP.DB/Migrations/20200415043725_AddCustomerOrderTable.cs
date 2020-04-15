@@ -3,10 +3,34 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace APP.DB.Migrations
 {
-    public partial class CreateOrderCustomerTable : Migration
+    public partial class AddCustomerOrderTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Pictures_Products_ProductId",
+                table: "Pictures");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Products_Products_ProductId",
+                table: "Products");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Products_ProductId",
+                table: "Products");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Pictures_ProductId",
+                table: "Pictures");
+
+            migrationBuilder.DropColumn(
+                name: "ProductId",
+                table: "Products");
+
+            migrationBuilder.DropColumn(
+                name: "ProductId",
+                table: "Pictures");
+
             migrationBuilder.AddColumn<long>(
                 name: "OrderId",
                 table: "Products",
@@ -43,7 +67,8 @@ namespace APP.DB.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<long>(nullable: false),
-                    PictureId = table.Column<long>(nullable: false)
+                    PictureId = table.Column<long>(nullable: false),
+                    ProductId1 = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,6 +85,12 @@ namespace APP.DB.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductPicture_Products_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,7 +98,9 @@ namespace APP.DB.Migrations
                 columns: table => new
                 {
                     Product1Id = table.Column<long>(nullable: false),
-                    Product2Id = table.Column<long>(nullable: false)
+                    Product2Id = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false),
+                    ProductId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,14 +109,18 @@ namespace APP.DB.Migrations
                         name: "FK_ProductsProducts_Products_Product1Id",
                         column: x => x.Product1Id,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductsProducts_Products_Product2Id",
                         column: x => x.Product2Id,
                         principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductsProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,9 +161,19 @@ namespace APP.DB.Migrations
                 column: "PictureId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductPicture_ProductId1",
+                table: "ProductPicture",
+                column: "ProductId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductsProducts_Product2Id",
                 table: "ProductsProducts",
                 column: "Product2Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductsProducts_ProductId",
+                table: "ProductsProducts",
+                column: "ProductId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Products_Orders_OrderId",
@@ -162,6 +209,44 @@ namespace APP.DB.Migrations
             migrationBuilder.DropColumn(
                 name: "OrderId",
                 table: "Products");
+
+            migrationBuilder.AddColumn<long>(
+                name: "ProductId",
+                table: "Products",
+                type: "bigint",
+                nullable: true);
+
+            migrationBuilder.AddColumn<long>(
+                name: "ProductId",
+                table: "Pictures",
+                type: "bigint",
+                nullable: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductId",
+                table: "Products",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pictures_ProductId",
+                table: "Pictures",
+                column: "ProductId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Pictures_Products_ProductId",
+                table: "Pictures",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Products_Products_ProductId",
+                table: "Products",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

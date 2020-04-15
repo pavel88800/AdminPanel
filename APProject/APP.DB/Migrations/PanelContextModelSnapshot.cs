@@ -344,9 +344,6 @@ namespace APP.DB.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("Sort")
                         .HasColumnType("int");
 
@@ -354,8 +351,6 @@ namespace APP.DB.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Pictures");
                 });
@@ -412,9 +407,6 @@ namespace APP.DB.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("SmallDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -445,8 +437,6 @@ namespace APP.DB.Migrations
 
                     b.HasIndex("PictureId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Products");
                 });
 
@@ -458,9 +448,14 @@ namespace APP.DB.Migrations
                     b.Property<long>("PictureId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("ProductId1")
+                        .HasColumnType("bigint");
+
                     b.HasKey("ProductId", "PictureId");
 
                     b.HasIndex("PictureId");
+
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("ProductPicture");
                 });
@@ -473,9 +468,17 @@ namespace APP.DB.Migrations
                     b.Property<long>("Product2Id")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Product1Id", "Product2Id");
 
                     b.HasIndex("Product2Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductsProducts");
                 });
@@ -563,13 +566,6 @@ namespace APP.DB.Migrations
                         .HasForeignKey("CustomerId");
                 });
 
-            modelBuilder.Entity("APP.DB.Models.Picture", b =>
-                {
-                    b.HasOne("APP.DB.Models.Product", null)
-                        .WithMany("Pictures")
-                        .HasForeignKey("ProductId");
-                });
-
             modelBuilder.Entity("APP.DB.Models.Product", b =>
                 {
                     b.HasOne("APP.DB.Models.BlogArticle", null)
@@ -591,10 +587,6 @@ namespace APP.DB.Migrations
                     b.HasOne("APP.DB.Models.Picture", "Picture")
                         .WithMany()
                         .HasForeignKey("PictureId");
-
-                    b.HasOne("APP.DB.Models.Product", null)
-                        .WithMany("RecomendedProducts")
-                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("APP.DB.Models.ProductPicture", b =>
@@ -610,6 +602,10 @@ namespace APP.DB.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("APP.DB.Models.Product", null)
+                        .WithMany("Pictures")
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("APP.DB.Models.ProductsProducts", b =>
@@ -617,14 +613,18 @@ namespace APP.DB.Migrations
                     b.HasOne("APP.DB.Models.Product", "Product1")
                         .WithMany()
                         .HasForeignKey("Product1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("APP.DB.Models.Product", "Product2")
                         .WithMany()
                         .HasForeignKey("Product2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("APP.DB.Models.Product", null)
+                        .WithMany("RecomendedProducts")
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("APP.DB.Models.Review", b =>

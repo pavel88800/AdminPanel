@@ -8,17 +8,19 @@ namespace APP.DB.Relationship
     {
         public void Configure(EntityTypeBuilder<ProductsProducts> builder)
         {
-            builder.HasKey(x => new {x.Product1Id, x.Product2Id});
+            builder.HasKey(x => new { x.Product1Id, x.Product2Id });
 
             builder
                 .HasOne(x => x.Product1)
                 .WithMany()
-                .HasForeignKey(k => k.Product1Id);
+                .HasForeignKey(k => k.Product1Id)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(x => x.Product2)
                 .WithMany()
-                .HasForeignKey(k => k.Product2Id);
+                .HasForeignKey(k => k.Product2Id)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
