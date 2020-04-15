@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using APP.BL.Dto;
-using APP.Models.Results;
-
-namespace APP.BL.Interfaces
+﻿namespace APP.BL.Interfaces
 {
-    interface IManufacturerService
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using APP.BL.Dto;
+    using APP.Models.Results;
+
+    public interface IManufacturerService
     {
         /// <summary>
         ///     Получить все производителей.
@@ -26,7 +24,7 @@ namespace APP.BL.Interfaces
         ///     Создать производителя .
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddManufacturer();
+        Task<Result> AddManufacturer(ManufacturerDto manufacturerDto);
 
         /// <summary>
         ///     Удалить производителя по идентификаторам.
@@ -34,5 +32,12 @@ namespace APP.BL.Interfaces
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteManufacturer(List<long> ids);
+
+        /// <summary>
+        ///     Обновление производителя.
+        /// </summary>
+        /// <param name="manufacturerDto">ДТО производителя.</param>
+        /// <returns></returns>
+        Result UpdateManufucturer(ManufacturerDto manufacturerDto);
     }
 }

@@ -49,6 +49,7 @@ namespace APProject
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IMetaService, MetaService>()
                 .AddScoped<IReviewService, ReviewService>()
+                .AddScoped<IManufacturerService, ManufacturerService>()
                 ;
         }
     }
