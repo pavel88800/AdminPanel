@@ -8,6 +8,14 @@ namespace APP.DB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_Categories_Categories_ParentCategoryId",
+                table: "Categories");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Categories_Pictures_PicturesId",
+                table: "Categories");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Pictures_Products_ProductId",
                 table: "Pictures");
 
@@ -23,6 +31,14 @@ namespace APP.DB.Migrations
                 name: "IX_Pictures_ProductId",
                 table: "Pictures");
 
+            migrationBuilder.DropIndex(
+                name: "IX_Categories_ParentCategoryId",
+                table: "Categories");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Categories_PicturesId",
+                table: "Categories");
+
             migrationBuilder.DropColumn(
                 name: "ProductId",
                 table: "Products");
@@ -31,10 +47,78 @@ namespace APP.DB.Migrations
                 name: "ProductId",
                 table: "Pictures");
 
+            migrationBuilder.DropColumn(
+                name: "ParentCategoryId",
+                table: "Categories");
+
+            migrationBuilder.DropColumn(
+                name: "PicturesId",
+                table: "Categories");
+
             migrationBuilder.AddColumn<long>(
                 name: "OrderId",
                 table: "Products",
                 nullable: true);
+
+            migrationBuilder.CreateTable(
+                name: "CategoryCategory",
+                columns: table => new
+                {
+                    Category1Id = table.Column<long>(nullable: false),
+                    Category2Id = table.Column<long>(nullable: false),
+                    CategoryId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryCategory", x => new { x.Category1Id, x.Category2Id });
+                    table.ForeignKey(
+                        name: "FK_CategoryCategory_Categories_Category1Id",
+                        column: x => x.Category1Id,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CategoryCategory_Categories_Category2Id",
+                        column: x => x.Category2Id,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CategoryCategory_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryPicture",
+                columns: table => new
+                {
+                    CategoryId = table.Column<long>(nullable: false),
+                    PictureId = table.Column<long>(nullable: false),
+                    CategoryId1 = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryPicture", x => new { x.CategoryId, x.PictureId });
+                    table.ForeignKey(
+                        name: "FK_CategoryPicture_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryPicture_Categories_CategoryId1",
+                        column: x => x.CategoryId1,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CategoryPicture_Pictures_PictureId",
+                        column: x => x.PictureId,
+                        principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Customers",
@@ -151,6 +235,26 @@ namespace APP.DB.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CategoryCategory_Category2Id",
+                table: "CategoryCategory",
+                column: "Category2Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryCategory_CategoryId",
+                table: "CategoryCategory",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryPicture_CategoryId1",
+                table: "CategoryPicture",
+                column: "CategoryId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryPicture_PictureId",
+                table: "CategoryPicture",
+                column: "PictureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
@@ -191,6 +295,12 @@ namespace APP.DB.Migrations
                 table: "Products");
 
             migrationBuilder.DropTable(
+                name: "CategoryCategory");
+
+            migrationBuilder.DropTable(
+                name: "CategoryPicture");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -222,6 +332,18 @@ namespace APP.DB.Migrations
                 type: "bigint",
                 nullable: true);
 
+            migrationBuilder.AddColumn<long>(
+                name: "ParentCategoryId",
+                table: "Categories",
+                type: "bigint",
+                nullable: true);
+
+            migrationBuilder.AddColumn<long>(
+                name: "PicturesId",
+                table: "Categories",
+                type: "bigint",
+                nullable: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductId",
                 table: "Products",
@@ -231,6 +353,32 @@ namespace APP.DB.Migrations
                 name: "IX_Pictures_ProductId",
                 table: "Pictures",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentCategoryId",
+                table: "Categories",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_PicturesId",
+                table: "Categories",
+                column: "PicturesId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Categories_Categories_ParentCategoryId",
+                table: "Categories",
+                column: "ParentCategoryId",
+                principalTable: "Categories",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Categories_Pictures_PicturesId",
+                table: "Categories",
+                column: "PicturesId",
+                principalTable: "Pictures",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Pictures_Products_ProductId",

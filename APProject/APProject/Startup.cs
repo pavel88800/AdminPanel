@@ -50,6 +50,7 @@ namespace APProject
                 .AddScoped<IMetaService, MetaService>()
                 .AddScoped<IReviewService, ReviewService>()
                 .AddScoped<IManufacturerService, ManufacturerService>()
+                .AddScoped<ICategoryService, CategoryService>()
                 ;
         }
     }

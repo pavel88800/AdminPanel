@@ -5,7 +5,7 @@
     using APP.BL.Dto;
     using APP.Models.Results;
 
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         /// <summary>
         ///     Получить все категории.
@@ -24,7 +24,7 @@
         ///     Создать категорию .
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddCategory();
+        Task<Result> AddCategory(CategoryDto categoryDto);
 
         /// <summary>
         ///     Удалить категории по идентификаторам.
@@ -32,5 +32,12 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteCategory(List<long> ids);
+
+        /// <summary>
+        ///     Обновить категорию
+        /// </summary>
+        /// <param name="categoryDto"></param>
+        /// <returns></returns>
+        Result UpdateCategory(CategoryDto categoryDto);
     }
 }

@@ -1,4 +1,5 @@
-﻿using APP.Models.BaseModelsEntities;
+﻿using System.Collections.Generic;
+using APP.Models.BaseModelsEntities;
 
 namespace APP.DB.Models
 {
@@ -7,6 +8,11 @@ namespace APP.DB.Models
     /// </summary>
     public class Category : BaseMetaInformation
     {
+        public Category()
+        {
+            ParentCategory = new List<CategoryCategory>();
+            Pictures = new List<CategoryPicture>();
+        }
         /// <summary>
         ///     Описание.
         /// </summary>
@@ -15,12 +21,12 @@ namespace APP.DB.Models
         /// <summary>
         ///     Родительская категория.
         /// </summary>
-        public Category ParentCategory { get; set; }
+        public List<CategoryCategory> ParentCategory { get; set; }
 
         /// <summary>
         ///     Изображние категории.
         /// </summary>
-        public Picture Pictures { get; set; }
+        public List<CategoryPicture> Pictures { get; set; }
         
     }
 }
