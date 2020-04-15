@@ -88,7 +88,7 @@
         {
             try
             {
-                var review = _context.Reviews.FirstOrDefault(x => x.Id == 2);
+                var review = _context.Reviews.FirstOrDefault(x => x.Id == reviewDto.Id);
                 var product = _context.Products.Find(reviewDto.ProductId);
 
                 if (review == null)

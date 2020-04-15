@@ -14,14 +14,14 @@ namespace APProject.Controllers.Api
         /// <summary>
         ///     Контроллер.
         /// </summary>
-        /// <param name="articleService"></param>
+        /// <param name="reviewService"></param>
         public ReviewController(IReviewService reviewService)
         {
             _reviewService = reviewService;
         }
 
         /// <summary>
-        ///     Получить все статьи.
+        ///     Получить все отзывы.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -32,7 +32,7 @@ namespace APProject.Controllers.Api
         }
 
         /// <summary>
-        ///     Получить статью по идентификатору.
+        ///     Получить отзыв по идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор.</param>
         /// <returns></returns>
@@ -45,9 +45,9 @@ namespace APProject.Controllers.Api
         }
 
         /// <summary>
-        ///     Создать новую статью.
+        ///     Создать новый отзыв.
         /// </summary>
-        /// <param name="articlesDto"></param>
+        /// <param name="reviewDto"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddArticle(ReviewDto reviewDto)
@@ -57,7 +57,7 @@ namespace APProject.Controllers.Api
         }
 
         /// <summary>
-        ///     Удалить статьи по идентификатору.
+        ///     Удалить отзывы по идентификатору.
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
@@ -69,9 +69,9 @@ namespace APProject.Controllers.Api
         }
 
         /// <summary>
-        ///     Удалить статьи по идентификатору.
+        ///     Обновить отзыв .
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="reviewDto"></param>
         /// <returns></returns>
         [HttpPut]
         public IActionResult UpdateReview(ReviewDto reviewDto)
