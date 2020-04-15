@@ -5,7 +5,7 @@
     using APP.BL.Dto;
     using APP.Models.Results;
 
-    internal interface IReviewService
+    public interface IReviewService
     {
         /// <summary>
         ///     Получить все отзывы.
@@ -24,7 +24,7 @@
         ///     Создать отзыв.
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddReview();
+        Task<Result> AddReview(ReviewDto reviewDto);
 
         /// <summary>
         ///     Удалить отзывы по идентификаторам.
@@ -32,5 +32,12 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteReview(List<long> ids);
+
+        /// <summary>
+        ///     Редактировать отзыв.
+        /// </summary>
+        /// <param name="id">Идентификатор отзыва.</param>
+        /// <returns></returns>
+        Result UpdateReview(ReviewDto reviewDto);
     }
 }
