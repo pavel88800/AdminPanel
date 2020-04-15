@@ -48,6 +48,7 @@ namespace APProject
                 .AddScoped<IBlogArticleService, BlogArticleService>()
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IMetaService, MetaService>()
+                .AddScoped<IReviewService, ReviewService>()
                 ;
         }
     }

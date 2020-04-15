@@ -1,13 +1,9 @@
-﻿using System;
-using APP.Models.BaseModelsEntities;
-using Newtonsoft.Json;
-
-namespace APP.DB.Models
+﻿namespace APP.BL.Dto
 {
-    /// <summary>
-    /// Отзывы товара.
-    /// </summary>
-    public class Review:BaseIdEntity
+    using System;
+    using APP.Models.BaseModelsEntities;
+
+    public class ReviewDto : BaseIdEntity
     {
         /// <summary>
         ///     Автор отзыва.
@@ -15,9 +11,9 @@ namespace APP.DB.Models
         public string Author { get; set; }
 
         /// <summary>
-        ///     Статья блога.
+        ///     Идентификатор продукта.
         /// </summary>
-        public Product Product { get; set; }
+        public long ProductId { get; set; }
 
         /// <summary>
         ///     Текст отзываю.
