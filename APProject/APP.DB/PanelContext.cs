@@ -68,6 +68,12 @@
         /// </summary>
         public DbSet<Order> Orders { get; set; }
 
+
+        public DbSet<CategoryPicture> CategoryPicture { get; set; }
+
+        public DbSet<CategoryCategory> CategoryCategory { get; set; }
+
+
         /// <summary>
         ///     Инициализация контекста.
         /// </summary>

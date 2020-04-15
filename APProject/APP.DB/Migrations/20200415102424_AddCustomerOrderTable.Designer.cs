@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APP.DB.Migrations
 {
     [DbContext(typeof(PanelContext))]
-    [Migration("20200415043725_AddCustomerOrderTable")]
+    [Migration("20200415102424_AddCustomerOrderTable")]
     partial class AddCustomerOrderTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,12 +211,6 @@ namespace APP.DB.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ParentCategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("PicturesId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("Sort")
                         .HasColumnType("int");
 
@@ -225,11 +219,47 @@ namespace APP.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentCategoryId");
-
-                    b.HasIndex("PicturesId");
-
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("APP.DB.Models.CategoryCategory", b =>
+                {
+                    b.Property<long>("Category1Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Category2Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Category1Id", "Category2Id");
+
+                    b.HasIndex("Category2Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("CategoryCategory");
+                });
+
+            modelBuilder.Entity("APP.DB.Models.CategoryPicture", b =>
+                {
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PictureId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CategoryId1")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CategoryId", "PictureId");
+
+                    b.HasIndex("CategoryId1");
+
+                    b.HasIndex("PictureId");
+
+                    b.ToTable("CategoryPicture");
                 });
 
             modelBuilder.Entity("APP.DB.Models.Customer", b =>
@@ -550,15 +580,42 @@ namespace APP.DB.Migrations
                         .HasForeignKey("BlogArticleId");
                 });
 
-            modelBuilder.Entity("APP.DB.Models.Category", b =>
+            modelBuilder.Entity("APP.DB.Models.CategoryCategory", b =>
                 {
-                    b.HasOne("APP.DB.Models.Category", "ParentCategory")
+                    b.HasOne("APP.DB.Models.Category", "Category1")
                         .WithMany()
-                        .HasForeignKey("ParentCategoryId");
+                        .HasForeignKey("Category1Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.HasOne("APP.DB.Models.Picture", "Pictures")
+                    b.HasOne("APP.DB.Models.Category", "Category2")
                         .WithMany()
-                        .HasForeignKey("PicturesId");
+                        .HasForeignKey("Category2Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("APP.DB.Models.Category", null)
+                        .WithMany("ParentCategory")
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("APP.DB.Models.CategoryPicture", b =>
+                {
+                    b.HasOne("APP.DB.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("APP.DB.Models.Category", null)
+                        .WithMany("Pictures")
+                        .HasForeignKey("CategoryId1");
+
+                    b.HasOne("APP.DB.Models.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("APP.DB.Models.Order", b =>

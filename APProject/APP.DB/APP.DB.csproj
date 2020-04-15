@@ -1,14 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200414102916_CreateOrderCustomerTable.cs" />
-    <Compile Remove="Migrations\20200414102916_CreateOrderCustomerTable.Designer.cs" />
-    <Compile Remove="Migrations\20200415042730_AddCustomerOrderTable.cs" />
-    <Compile Remove="Migrations\20200415042730_AddCustomerOrderTable.Designer.cs" />
+
   </ItemGroup>
 
   <ItemGroup>
