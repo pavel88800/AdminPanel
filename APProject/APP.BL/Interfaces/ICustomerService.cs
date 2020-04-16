@@ -8,7 +8,7 @@
     /// <summary>
     ///     Интерфейс по работе с покупателями.
     /// </summary>
-    internal interface ICustomerService
+    public interface ICustomerService
     {
         /// <summary>
         ///     Получить все категории.
@@ -27,7 +27,7 @@
         ///     Создать категорию .
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddCustomer();
+        Task<Result> AddCustomer(CustomerDto customerDto);
 
         /// <summary>
         ///     Удалить категории по идентификаторам.
@@ -35,5 +35,11 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteCustomer(List<long> ids);
+
+        /// <summary>
+        /// Обновить покупателя.
+        /// </summary>
+        /// <returns></returns>
+        Result UpdateCustomer(CustomerDto customerDto);
     }
 }
