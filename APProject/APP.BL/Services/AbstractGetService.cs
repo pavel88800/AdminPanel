@@ -83,7 +83,7 @@ namespace APP.BL.Services
         /// <returns></returns>
         protected async Task<Picture> GetFile(IFormFile file)
         {
-            if (file != null)
+            if (file != null && file.Length > 0) 
             {
                 using var memoryStream = new MemoryStream();
                 await file.CopyToAsync(memoryStream);
@@ -98,7 +98,7 @@ namespace APP.BL.Services
                 };
                 return picture;
             }
-            return new Picture();
+            return null;
         }
     }
 }

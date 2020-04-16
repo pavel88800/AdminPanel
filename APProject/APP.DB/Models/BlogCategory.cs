@@ -1,12 +1,18 @@
-﻿using APP.Models.BaseModelsEntities;
-
-namespace APP.DB.Models
+﻿namespace APP.DB.Models
 {
+    using System.Collections.Generic;
+    using APP.Models.BaseModelsEntities;
+
     /// <summary>
     ///     Категории блога.
     /// </summary>
     public class BlogCategory : BaseMetaInformation
     {
+        public BlogCategory()
+        {
+            BlogCategories = new List<BlogCategory2BlogCategory>();
+        }
+
         /// <summary>
         ///     Описание.
         /// </summary>
@@ -15,7 +21,7 @@ namespace APP.DB.Models
         /// <summary>
         ///     Родительская категория.
         /// </summary>
-        public BlogCategory BlogCategories { get; set; }
+        public List<BlogCategory2BlogCategory> BlogCategories { get; set; }
 
         /// <summary>
         ///     Изображение.

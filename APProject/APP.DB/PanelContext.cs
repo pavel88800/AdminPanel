@@ -68,10 +68,20 @@
         /// </summary>
         public DbSet<Order> Orders { get; set; }
 
-
+        /// <summary>
+        ///     Связь категории и изображений.
+        /// </summary>
         public DbSet<CategoryPicture> CategoryPicture { get; set; }
 
+        /// <summary>
+        ///     Связь категории и категории.
+        /// </summary>
         public DbSet<CategoryCategory> CategoryCategory { get; set; }
+
+        /// <summary>
+        ///     Связь категории блога и категории блога.
+        /// </summary>
+        public DbSet<BlogCategory2BlogCategory> BlogCategory2BlogCategories { get; set; }
 
 
         /// <summary>
