@@ -1,26 +1,15 @@
-﻿namespace APP.DB.Models
+﻿using System;
+using System.Collections.Generic;
+using APP.Models.BaseModelsEntities;
+
+namespace APP.BL.Dto
 {
-    using System;
-    using System.Collections.Generic;
-    using APP.Models.BaseModelsEntities;
-
-    /// <summary>
-    ///     Сущность по работе с заказами
-    /// </summary>
-    public class Order : BaseIdEntity
+    public class OrderDto : BaseIdEntity
     {
-        /// <summary>
-        ///     Конструктор.
-        /// </summary>
-        public Order()
-        {
-            Products = new List<OrderProduct>();
-        }
-
         /// <summary>
         ///     Покупатель.
         /// </summary>
-        public Customer Customer { get; set; }
+        public long CustomerId { get; set; }
 
         /// <summary>
         ///     Сумма итоговая.
@@ -40,6 +29,6 @@
         /// <summary>
         ///     Товары.
         /// </summary>
-        public IList<OrderProduct> Products { get; set; }
+        public long[] ProductsId { get; set; }
     }
 }

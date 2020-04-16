@@ -5,7 +5,7 @@
     using APP.BL.Dto;
     using APP.Models.Results;
 
-    internal interface IOrderService
+    public interface IOrderService
     {
         /// <summary>
         ///     Получить все заказы.
@@ -24,7 +24,7 @@
         ///     Создать заказ .
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddOrder();
+        Task<Result> AddOrder(OrderDto orderDto);
 
         /// <summary>
         ///     Удалить заказы по идентификаторам.
@@ -32,5 +32,12 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteOrder(List<long> ids);
+
+        /// <summary>
+        ///     Обновить заказ.
+        /// </summary>
+        /// <param name="orderDto">.</param>
+        /// <returns></returns>
+        Result UpdateOrder(OrderDto orderDto);
     }
 }

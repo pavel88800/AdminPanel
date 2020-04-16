@@ -54,6 +54,7 @@ namespace APProject
                 .AddScoped<IBlogCategoryService, BlogCategoryService>()
                 .AddScoped<IBlogRewiewService, BlogRewiewService>()
                 .AddScoped<ICustomerService, CustomerService>()
+                .AddScoped<IOrderService, OrderService>()
                 ;
         }
     }
