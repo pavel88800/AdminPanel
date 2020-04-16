@@ -51,6 +51,7 @@ namespace APProject
                 .AddScoped<IReviewService, ReviewService>()
                 .AddScoped<IManufacturerService, ManufacturerService>()
                 .AddScoped<ICategoryService, CategoryService>()
+                .AddScoped<IBlogCategoryService, BlogCategoryService>()
                 ;
         }
     }

@@ -8,7 +8,7 @@
     /// <summary>
     ///     Интерфейс по работе категориями.
     /// </summary>
-    internal interface IBlogCategoryService
+    public interface IBlogCategoryService
     {
         /// <summary>
         ///     Получить все категории блога.
@@ -27,7 +27,7 @@
         ///     Создать категорию блога.
         /// </summary>
         /// <returns></returns>
-        Task<Result> AddCategory();
+        Task<Result> AddCategory(BlogCategoryDto blogCategoryDto);
 
         /// <summary>
         ///     Удалить категории блога по идентификаторам.
@@ -35,5 +35,12 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteCategory(List<long> ids);
+
+        /// <summary>
+        ///     Отредактировать категорию блога
+        /// </summary>
+        /// <param name="blogCategoryDto">DTO категории блога.</param>
+        /// <returns></returns>
+        Result UpdateCategory(BlogCategoryDto blogCategoryDto);
     }
 }

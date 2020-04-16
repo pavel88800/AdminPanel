@@ -92,7 +92,7 @@
                 var product = _context.Products.Find(reviewDto.ProductId);
 
                 if (review == null)
-                    return Result.Fail("dfsf");
+                    return Result.Fail("Отзыв не отредактирован. Попробуйте снова.");
 
                 review.Product = product;
                 review.Author = reviewDto.Author;
