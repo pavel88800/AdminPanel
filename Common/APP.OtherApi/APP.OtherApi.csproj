@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.45.0.1918" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\APProject\APP.DB\APP.DB.csproj" />
+    <ProjectReference Include="..\APP.Models\APP.Models.csproj" />
+  </ItemGroup>
+
+</Project>

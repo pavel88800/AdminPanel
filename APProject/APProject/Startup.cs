@@ -1,3 +1,6 @@
+using APP.OtherApi.YouTube.Intefaces;
+using APP.OtherApi.YouTube.Services;
+
 namespace APProject
 {
     using APP.BL.Interfaces;
@@ -55,6 +58,7 @@ namespace APProject
                 .AddScoped<IBlogRewiewService, BlogRewiewService>()
                 .AddScoped<ICustomerService, CustomerService>()
                 .AddScoped<IOrderService, OrderService>()
+                .AddScoped<ISearchByKeywordService, SearchByKeywordService>()
                 ;
         }
     }
