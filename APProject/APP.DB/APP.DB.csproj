@@ -5,7 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200417093302_AddVideoTable.cs" />
+    <Compile Remove="Migrations\20200417093302_AddVideoTable.Designer.cs" />
+    <Compile Remove="Migrations\20200417095026_AddVideoProductTable.cs" />
+    <Compile Remove="Migrations\20200417095026_AddVideoProductTable.Designer.cs" />
+    <Compile Remove="Migrations\20200417095329_AddVideoProductTable.cs" />
+    <Compile Remove="Migrations\20200417095329_AddVideoProductTable.Designer.cs" />
+    <Compile Remove="Migrations\20200417095651_AddVideoProductTable.cs" />
+    <Compile Remove="Migrations\20200417095651_AddVideoProductTable.Designer.cs" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapping\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +32,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mapping\" />
   </ItemGroup>
 
   <ItemGroup>

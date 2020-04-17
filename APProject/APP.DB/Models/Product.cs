@@ -1,21 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using APP.Models.BaseModelsEntities;
-using Newtonsoft.Json;
-
-namespace APP.DB.Models
+﻿namespace APP.DB.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using APP.Models.BaseModelsEntities;
+    using Newtonsoft.Json;
+
     /// <summary>
     ///     Продукты.
     /// </summary>
     public class Product : BaseMetaInformation
     {
+        /// <summary>
+        ///     Промежуточное поле для хранения десериализованных данных.
+        /// </summary>
+        [NotMapped] private Dictionary<string, string> _deserializedCharacteristics;
+
+        /// <summary>
+        ///     Поле в БД для словаря коэффициентов
+        /// </summary>
+        [Column(TypeName = "jsonb")] private string _сharacteristics;
+
         public Product()
         {
             RecomendedProducts = new List<ProductsProducts>();
             Pictures = new List<ProductPicture>();
+            VideoProduct = new List<VideoProduct>();
         }
+
         /// <summary>
         ///     Описание.
         /// </summary>
@@ -37,20 +49,20 @@ namespace APP.DB.Models
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Акция.
+        ///     Акция.
         /// </summary>
         public decimal Stock { get; set; }
 
         /// <summary>
-        /// Дата начала акции.
+        ///     Дата начала акции.
         /// </summary>
         public DateTime DataStartStock { get; set; }
-        
+
         /// <summary>
-        /// Дата окончания акции.
+        ///     Дата окончания акции.
         /// </summary>
         public DateTime DataEndStock { get; set; }
-        
+
         /// <summary>
         ///     Количество.
         /// </summary>
@@ -85,7 +97,11 @@ namespace APP.DB.Models
         ///     Изображения
         /// </summary>
         public List<ProductPicture> Pictures { get; set; }
-        
+
+        /// <summary>
+        ///     Ссылка на видео.
+        /// </summary>
+        public List<VideoProduct> VideoProduct { get; set; }
 
         /// <summary>
         ///     Характеристики.
@@ -93,23 +109,8 @@ namespace APP.DB.Models
         [NotMapped]
         public Dictionary<string, string> Characteristics
         {
-            get
-            {
-                return _deserializedCharacteristics ??= DeserializeWeights(_сharacteristics);
-            }
+            get { return _deserializedCharacteristics ??= DeserializeWeights(_сharacteristics); }
         }
-
-        /// <summary>
-        ///     Промежуточное поле для хранения десериализованных данных.
-        /// </summary>
-        [NotMapped]
-        private Dictionary<string, string> _deserializedCharacteristics;
-
-        /// <summary>
-        ///     Поле в БД для словаря коэффициентов
-        /// </summary>
-        [Column(TypeName = "jsonb")]
-        private string _сharacteristics;
 
         /// <summary>
         ///     Десериализация словаря из БД.
@@ -120,6 +121,5 @@ namespace APP.DB.Models
         {
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonWeights);
         }
-
     }
 }
