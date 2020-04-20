@@ -1,3 +1,4 @@
+using APP.DocsModule.GoogleSheets.Services;
 using APP.OtherApi.YouTube.Intefaces;
 using APP.OtherApi.YouTube.Services;
 
@@ -59,6 +60,7 @@ namespace APProject
                 .AddScoped<ICustomerService, CustomerService>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<ISearchByKeywordService, SearchByKeywordService>()
+                .AddScoped<GoogleSheetsService>()
                 ;
         }
     }
