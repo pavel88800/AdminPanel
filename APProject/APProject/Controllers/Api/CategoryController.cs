@@ -74,7 +74,7 @@
         /// <param name="categoryDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateReview([FromForm]CategoryDto categoryDto)
+        public IActionResult UpdateCategory([FromForm]CategoryDto categoryDto)
         {
             var result = _categoryService.UpdateCategory(categoryDto);
             return Ok(result);

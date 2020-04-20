@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using APP.BL.Dto;
-using APP.Models.Results;
-
-namespace APP.BL.Interfaces
+﻿namespace APP.BL.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using APP.BL.Dto;
+    using APP.Models.Results;
+
     /// <summary>
     ///     Интерфейс по работе со статьями.
     /// </summary>
@@ -35,5 +35,12 @@ namespace APP.BL.Interfaces
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteArticles(List<long> ids);
+
+        /// <summary>
+        ///     Обновить статью.
+        /// </summary>
+        /// <param name="articlesDto"></param>
+        /// <returns></returns>
+        Result UpdateArticle(ArticlesDto articlesDto);
     }
 }

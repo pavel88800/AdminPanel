@@ -74,7 +74,7 @@
         /// <param name="orderDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateReview([FromForm] OrderDto orderDto)
+        public IActionResult UpdateOrder([FromForm] OrderDto orderDto)
         {
             var result = _orderService.UpdateOrder(orderDto);
             return Ok(result);

@@ -70,5 +70,17 @@ namespace APProject.Controllers.Api
             var result =_articleService.DeleteArticles(ids);
             return Ok(result);
         }
+
+        /// <summary>
+        ///     Обновить статью .
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public IActionResult UpdateArticles(ArticlesDto articlesDto)
+        {
+            var result = _articleService.UpdateArticle(articlesDto);
+            return Ok(result);
+        }
     }
 }

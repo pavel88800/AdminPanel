@@ -67,5 +67,17 @@ namespace APProject.Controllers.Api
             var result = _blogArticleService.DeleteBlogArticle(ids);
             return Ok(result);
         }
+
+        /// <summary>
+        ///     Обновить статью.
+        /// </summary>
+        /// <param name="articlesDto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> UpdateBlogArticle([FromForm]BlogArticlesDto articlesDto)
+        {
+            var result = _blogArticleService.UpdateBlogArticle(articlesDto);
+            return Ok(result);
+        }
     }
 }

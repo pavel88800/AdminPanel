@@ -67,5 +67,12 @@ namespace APProject.Controllers.Api
             var result = _productService.DeleteProduct(ids);
             return Ok(result);
         }
+
+        [HttpPut]
+        public IActionResult UpdateProduct([FromForm]ProductDto productDto)
+        {
+            var res = _productService.UpdateProduct(productDto);
+            return Ok(res);
+        }
     }
 }

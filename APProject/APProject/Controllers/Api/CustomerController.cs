@@ -76,7 +76,7 @@ namespace APProject.Controllers.Api
         /// <param name="customerDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateReview([FromForm] CustomerDto customerDto)
+        public IActionResult UpdateCustomer([FromForm] CustomerDto customerDto)
         {
             var result = _customerService.UpdateCustomer(customerDto);
             return Ok(result);

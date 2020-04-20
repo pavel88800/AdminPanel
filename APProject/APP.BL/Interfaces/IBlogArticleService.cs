@@ -35,5 +35,11 @@ namespace APP.BL.Interfaces
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteBlogArticle(List<long> ids);
+
+        /// <summary>
+        ///     Обновить статью.
+        /// </summary>
+        /// <returns></returns>
+        Result UpdateBlogArticle(BlogArticlesDto blogArticlesDto);
     }
 }

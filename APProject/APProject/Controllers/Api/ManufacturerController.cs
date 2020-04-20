@@ -77,7 +77,7 @@
         /// <param name="manufacturerDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult UpdateReview(ManufacturerDto manufacturerDto)
+        public IActionResult UpdateManufucturer(ManufacturerDto manufacturerDto)
         {
             var result = _manufacturerService.UpdateManufucturer(manufacturerDto);
             return Ok(result);

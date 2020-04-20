@@ -1,14 +1,14 @@
-﻿namespace APP.BL.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using APP.BL.Dto;
-    using APP.BL.Interfaces;
-    using APP.DB;
-    using APP.DB.Models;
-    using APP.Models.Results;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using APP.BL.Dto;
+using APP.BL.Interfaces;
+using APP.DB;
+using APP.DB.Models;
+using APP.Models.Results;
 
+namespace APP.BL.Services
+{
     /// <summary>
     ///     Сервис по работе со статьями.
     /// </summary>
@@ -31,8 +31,8 @@
         /// <inheritdoc />
         public async Task<OffsetEntitiesDto> GetArticlesAsync(int offset, int count)
         {
-           var result = await GetPagesAsync(offset, count);
-           return result;
+            var result = await GetPagesAsync(offset, count);
+            return result;
         }
 
         /// <inheritdoc />
@@ -80,6 +80,37 @@
             catch (Exception e)
             {
                 throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <inheritdoc />
+        public Result UpdateArticle(ArticlesDto articlesDto)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var article = _context.Articleses.Find(articlesDto.Id);
+
+                article.Description = articlesDto.Description;
+                article.HtmlH1 = articlesDto.HtmlH1;
+                article.MetaDescription = articlesDto.MetaDescription;
+                article.MetaKeywords = articlesDto.MetaKeywords;
+                article.MetaTitle = articlesDto.MetaTitle;
+                article.Name = articlesDto.Name;
+                article.Sort = articlesDto.Sort;
+                article.Status = articlesDto.Status;
+
+                _context.Update(article);
+                _context.SaveChanges();
+
+                transaction.Commit();
+
+                return Result.Ok();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                throw new ApplicationException(e.InnerException.Message ?? e.Message);
             }
         }
     }
