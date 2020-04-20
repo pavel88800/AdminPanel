@@ -71,11 +71,11 @@ namespace APP.BL.Dto
         /// <summary>
         ///     Главное изображение.
         /// </summary>
-        public IFormFile Picture { get; set; }
+        public IFormFile? Picture { get; set; }
 
         /// <summary>
         ///     Изображения
         /// </summary>
-        public IFormFileCollection Files { get; set; }
+        public IFormFileCollection? Files { get; set; }
     }
 }
