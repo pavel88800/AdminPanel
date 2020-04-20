@@ -92,6 +92,66 @@
             }
         }
 
+        /// <inheritdoc />
+        public Result UpdateProduct(ProductDto productDto)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var picture = GetFile(productDto.Picture).Result;
+                var listPicture = productDto.Files.Select(file => GetFile(file).Result).ToList();
+
+                var manufacturer = _context.Manufacturers.Find(productDto.ManufacturerId);
+
+                var listRecomendedProducts = _context.Products
+                    .Where(x => productDto.RecomendedProductsId.Contains(x.Id))
+                    .ToList();
+                var category = _context.Categories.Find(productDto.CategoryId);
+
+                var product = _context.Products.Find(productDto.Id);
+                product.Sort = productDto.Sort;
+                product.Status = productDto.Status;
+                product.Name = productDto.Name;
+                product.Count = productDto.Count;
+                product.DataEndStock = productDto.DataEndStock;
+                product.DataStartStock = productDto.DataStartStock;
+                product.FullDescription = productDto.FullDescription;
+                product.HtmlH1 = productDto.HtmlH1;
+                product.MetaDescription = productDto.MetaDescription;
+                product.MetaKeywords = productDto.MetaKeywords;
+                product.MetaTitle = productDto.MetaTitle;
+                product.Price = productDto.Price;
+                product.SmallDescription = productDto.SmallDescription;
+                product.Stock = productDto.Stock;
+                product.Tags = productDto.Tags;
+                product.Weight = productDto.Weight;
+                product.Picture = picture;
+                product.Manufacturer = manufacturer;
+                product.Categories = category;
+
+                _context.Update(product);
+                _context.SaveChanges();
+
+                var listProductProduct = GetProductProductList(listRecomendedProducts, product);
+
+                _context.AddRange(listProductProduct);
+                _context.SaveChanges();
+
+                var productPictures = GetProductPictureList(listPicture, product);
+
+                _context.AddRange(productPictures);
+                _context.SaveChanges();
+
+                transaction.Commit();
+                return Result.Ok();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                throw new ApplicationException(e.InnerException.Message ?? e.Message);
+            }
+        }
+
         /// <summary>
         ///     Получить объект нового проекта.
         /// </summary>

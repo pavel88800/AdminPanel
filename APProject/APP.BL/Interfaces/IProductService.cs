@@ -32,5 +32,12 @@
         /// <param name="ids">Массив идентификаторов.</param>
         /// <returns></returns>
         Result DeleteProduct(List<long> ids);
+
+        /// <summary>
+        ///     Обновить товар.
+        /// </summary>
+        /// <returns></returns>
+        Result UpdateProduct(ProductDto productDto);
+
     }
 }

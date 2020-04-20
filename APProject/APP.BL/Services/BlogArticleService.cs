@@ -97,5 +97,47 @@
                 throw new ApplicationException(e.Message);
             }
         }
+
+        /// <inheritdoc />
+        public Result UpdateBlogArticle(BlogArticlesDto blogArticlesDto)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+
+            try
+            {
+                var picture = GetFile(blogArticlesDto.Picture).Result;
+                var blogCategory = _context.BlogCategory.Find(blogArticlesDto.BlogCategoryId);
+
+                var blogArticles = new List<BlogArticle>();
+
+                if (blogArticlesDto.BlogArticlesId.Length > 0)
+                    blogArticles = _context.BlogArticles.Where(x => blogArticlesDto.BlogArticlesId.Contains(x.Id))
+                        .ToList();
+                
+                var blogArticle = _context.BlogArticles.Find(blogArticlesDto.Id);
+                blogArticle.Description = blogArticlesDto.Description;
+                blogArticle.HtmlH1 = blogArticlesDto.HtmlH1;
+                blogArticle.MetaDescription = blogArticlesDto.MetaDescription;
+                blogArticle.MetaKeywords = blogArticlesDto.MetaKeywords;
+                blogArticle.MetaTitle = blogArticlesDto.MetaTitle;
+                blogArticle.Name = blogArticlesDto.Name;
+                blogArticle.Sort = blogArticlesDto.Sort;
+                blogArticle.Status = blogArticlesDto.Status;
+                blogArticle.BlogCategory = blogCategory;
+                blogArticle.Picture = picture;
+                blogArticle.BlogArticles = blogArticles;
+                
+                _context.Update(blogArticle);
+                _context.SaveChanges();
+
+                transaction.Commit();
+                return Result.Ok();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                throw new ApplicationException(e.InnerException.Message ?? e.Message);
+            }
+        }
     }
 }
