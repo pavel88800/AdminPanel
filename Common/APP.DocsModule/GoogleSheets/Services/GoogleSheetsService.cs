@@ -1,14 +1,18 @@
-﻿namespace APP.DocsModule.GoogleSheets.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using APP.DB;
-    using Google.Apis.Auth.OAuth2;
-    using Google.Apis.Services;
-    using Google.Apis.Sheets.v4;
-    using Google.Apis.Sheets.v4.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using APP.DB;
+using APP.DB.Models;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Services;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using Microsoft.EntityFrameworkCore;
 
+namespace APP.DocsModule.GoogleSheets.Services
+{
     public class GoogleSheetsService
     {
         private static readonly string[] Scopes = {SheetsService.Scope.Spreadsheets};
@@ -16,7 +20,13 @@
         private static readonly string SpreadsheetId = "1e6sal15RxdXA12pcyYL0RafIgsql5IVJ3u-epv1FXpo";
         private static readonly string sheet = "Test";
         private static readonly SheetsService service = CreateServiceSheets();
+        private static readonly string RANGE = $"{sheet}!A:F";
         private readonly PanelContext _context;
+
+        /// <summary>
+        ///     Множество.
+        /// </summary>
+        private readonly DbSet<object> _set;
 
         public GoogleSheetsService(PanelContext context)
         {
@@ -25,9 +35,8 @@
 
         public void ReadEntries()
         {
-            var range = $"{sheet}!A:F";
             var request =
-                service.Spreadsheets.Values.Get(SpreadsheetId, range);
+                service.Spreadsheets.Values.Get(SpreadsheetId, RANGE);
 
             var response = request.Execute();
             var values = response.Values;
@@ -40,30 +49,76 @@
                 Console.WriteLine("No data found.");
         }
 
+        /// <summary>
+        ///     Метод записи в гугл таблицу
+        /// </summary>
+        /// <remarks>Пока запись велется только для товаров. т.к. я хз как сделать динамически.</remarks>
         public void CreateEntry()
         {
-            var range = $"{sheet}!A:Z";
-            var valueRange = new ValueRange();
+            var products = _context.Products.ToList();
 
-            var oblist = new List<object> {"Hello!", "This", "was", "insertd", "via", "C#"};
+            SetCell(products, true);
+            SetCell(products);
+        }
 
-            valueRange.Values = new List<IList<object>> {oblist};
+        /// <summary>
+        ///     Метод записи в ячейку.
+        /// </summary>
+        /// <param name="products"> Список продуктов. </param>
+        /// <param name="isHead">Запись заголовока. DEFAULT - FALSE</param>
+        private void SetCell(List<Product> products, bool isHead = false)
+        {
+            var listObjectHead = new List<object>();
+            var listObject = new List<object>();
 
-            var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetId, range);
-            appendRequest.ValueInputOption =
-                SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-            var appendReponse = appendRequest.Execute();
+            foreach (var p in products)
+            {
+                var fields = p.GetType().GetProperties(BindingFlags.Public |
+                                                       BindingFlags.NonPublic |
+                                                       BindingFlags.Instance);
+
+                foreach (var field in fields)
+                {
+                    if (field.Name == "Manufacturer" ||
+                        field.Name == "Categories" ||
+                        field.Name == "Picture" ||
+                        field.Name == "RecomendedProducts" ||
+                        field.Name == "Pictures" ||
+                        field.Name == "VideoProduct" ||
+                        field.Name == "Characteristics")
+                        continue;
+
+                    var value = field.GetValue(p);
+
+                    if (value == null)
+                        continue;
+
+                    listObjectHead.Add(field.Name);
+                    listObject.Add(value);
+                }
+
+                var valueRange = new ValueRange();
+                valueRange.Values = new List<IList<object>> {isHead ? listObjectHead : listObject};
+                var appendRequest = service.Spreadsheets.Values.Append(valueRange, SpreadsheetId, RANGE);
+                appendRequest.ValueInputOption =
+                    SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+                appendRequest.Execute();
+
+                if (isHead)
+                    break;
+
+                listObject = new List<object>();
+            }
         }
 
         public void UpdateEntry()
         {
-            var range = $"{sheet}!D543";
             var valueRange = new ValueRange();
 
             var oblist = new List<object> {"updated"};
             valueRange.Values = new List<IList<object>> {oblist};
 
-            var updateRequest = service.Spreadsheets.Values.Update(valueRange, SpreadsheetId, range);
+            var updateRequest = service.Spreadsheets.Values.Update(valueRange, SpreadsheetId, RANGE);
             updateRequest.ValueInputOption =
                 SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
             var appendReponse = updateRequest.Execute();
@@ -71,10 +126,9 @@
 
         public void DeleteEntry()
         {
-            var range = $"{sheet}!A543:F";
             var requestBody = new ClearValuesRequest();
 
-            var deleteRequest = service.Spreadsheets.Values.Clear(requestBody, SpreadsheetId, range);
+            var deleteRequest = service.Spreadsheets.Values.Clear(requestBody, SpreadsheetId, RANGE);
             var deleteReponse = deleteRequest.Execute();
         }
 
