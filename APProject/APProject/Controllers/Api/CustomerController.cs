@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class CustomerController : BaseApiController
+    public class CustomerController : BaseApiAuthController
     {
         private readonly ICustomerService _customerService;
 

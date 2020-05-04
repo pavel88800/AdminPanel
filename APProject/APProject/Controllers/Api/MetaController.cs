@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace APProject.Controllers.Api
 {
-    public class MetaController : BaseApiController
+    public class MetaController : BaseApiAuthController
     {
         private readonly IMetaService _metaService;
         public MetaController(IConfiguration configuration, IMetaService metaService)

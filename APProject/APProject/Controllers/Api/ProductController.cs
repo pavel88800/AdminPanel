@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class ProductController : BaseApiController
+    public class ProductController : BaseApiAuthController
     {
         private readonly IProductService _productService;
 

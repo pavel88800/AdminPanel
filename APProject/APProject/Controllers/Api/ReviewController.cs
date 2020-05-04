@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class ReviewController : BaseApiController
+    public class ReviewController : BaseApiAuthController
     {
         private readonly IReviewService _reviewService;
 

@@ -7,7 +7,7 @@
     using APProject.Controllers.Base;
     using Microsoft.AspNetCore.Mvc;
 
-    public class OrderController : BaseApiController
+    public class OrderController : BaseApiAuthController
     {
         private readonly IOrderService _orderService;
 

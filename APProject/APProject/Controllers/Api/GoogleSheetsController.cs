@@ -5,7 +5,7 @@
     using APProject.Controllers.Base;
     using Microsoft.AspNetCore.Mvc;
 
-    public class GoogleSheetsController : BaseApiController
+    public class GoogleSheetsController : BaseApiAuthController
     {
         private readonly IGoogleSheetsService _googleSheets;
 

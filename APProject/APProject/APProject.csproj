@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\APP.Auth\APP.Auth.csproj" />
     <ProjectReference Include="..\..\Common\APP.Common\APP.Common.csproj" />
     <ProjectReference Include="..\..\Common\APP.DocsModule\APP.DocsModule.csproj" />
     <ProjectReference Include="..\..\Common\APP.OtherApi\APP.OtherApi.csproj" />

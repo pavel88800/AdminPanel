@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class BlogReviewController : BaseApiController
+    public class BlogReviewController : BaseApiAuthController
     {
         private readonly IBlogRewiewService _blogRewiewService;
 
