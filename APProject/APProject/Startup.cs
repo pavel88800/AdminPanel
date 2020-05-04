@@ -1,3 +1,6 @@
+using APP.Auth.Interfaces;
+using APP.Auth.Services;
+
 namespace APProject
 {
     using APP.BL.Interfaces;
@@ -28,8 +31,11 @@ namespace APProject
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSwaggerApp();
             app.UseMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -38,8 +44,10 @@ namespace APProject
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services
-                .AddSwaggerAppGen()
+                .AddSwaggerAppGen(AuthType.Bearer)
+                .AddJwtBearer(false,true)
                 .AddDbContext<PanelContext>(options => options.UseSqlServer(connection))
+                
                 ;
 
             ImplementDependency(services);
@@ -61,6 +69,7 @@ namespace APProject
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<ISearchByKeywordService, SearchByKeywordService>()
                 .AddScoped<IGoogleSheetsService, GoogleSheetsService>()
+                .AddScoped<IGenerateTokenService, GenerateTokenService>()
                 ;
         }
     }

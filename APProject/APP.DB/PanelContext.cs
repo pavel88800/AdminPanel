@@ -83,10 +83,20 @@
         /// </summary>
         public DbSet<BlogCategory2BlogCategory> BlogCategory2BlogCategories { get; set; }
 
+        /// <summary>
+        ///     Пользователи.
+        /// </summary>
+        public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        ///     Роли.
+        /// </summary>
+        public DbSet<Role> Roles { get; set; }
 
         /// <summary>
         ///     Инициализация контекста.
         /// </summary>
+        
         public void Init()
         {
             Database.Migrate();

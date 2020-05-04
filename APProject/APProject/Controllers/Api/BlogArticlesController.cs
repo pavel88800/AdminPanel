@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class BlogArticlesController : BaseApiController
+    public class BlogArticlesController : BaseApiAuthController
     {
         private readonly IBlogArticleService _blogArticleService;
 

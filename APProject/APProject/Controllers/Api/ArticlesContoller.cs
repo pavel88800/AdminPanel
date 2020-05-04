@@ -10,7 +10,7 @@ namespace APProject.Controllers.Api
     /// <summary>
     ///     Контроллер Статей.
     /// </summary>
-    public class ArticlesContoller : BaseApiController
+    public class ArticlesContoller : BaseApiAuthController
     {
         private readonly IArticleService _articleService;
 

@@ -7,7 +7,7 @@
     using APProject.Controllers.Base;
     using Microsoft.AspNetCore.Mvc;
 
-    public class CategoryController : BaseApiController
+    public class CategoryController : BaseApiAuthController
     {
         private readonly ICategoryService _categoryService;
 

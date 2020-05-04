@@ -7,7 +7,7 @@
     using APProject.Controllers.Base;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ManufacturerController : BaseApiController
+    public class ManufacturerController : BaseApiAuthController
     {
         /// <summary>
         ///     Сервис по работе с производителями.

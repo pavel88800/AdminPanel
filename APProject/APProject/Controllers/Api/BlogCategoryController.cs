@@ -10,7 +10,7 @@
     /// <summary>
     ///     Контроллер по работе с категориями блога.
     /// </summary>
-    public class BlogCategoryController : BaseApiController
+    public class BlogCategoryController : BaseApiAuthController
     {
         private readonly IBlogCategoryService _blogCategoryService;
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
 {
-    public class SearchByKeywordApiYouTubeController : BaseApiController
+    public class SearchByKeywordApiYouTubeController : BaseApiAuthController
     {
         private readonly ISearchByKeywordService _search;
 
