@@ -1,12 +1,12 @@
-using APP.DocsModule.GoogleSheets.Services;
-using APP.OtherApi.YouTube.Intefaces;
-using APP.OtherApi.YouTube.Services;
-
 namespace APProject
 {
     using APP.BL.Interfaces;
     using APP.BL.Services;
     using APP.DB;
+    using APP.DocsModule.GoogleSheets.Interfaces;
+    using APP.DocsModule.GoogleSheets.Services;
+    using APP.OtherApi.YouTube.Intefaces;
+    using APP.OtherApi.YouTube.Services;
     using APSwagger;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -60,7 +60,7 @@ namespace APProject
                 .AddScoped<ICustomerService, CustomerService>()
                 .AddScoped<IOrderService, OrderService>()
                 .AddScoped<ISearchByKeywordService, SearchByKeywordService>()
-                .AddScoped<GoogleSheetsService>()
+                .AddScoped<IGoogleSheetsService, GoogleSheetsService>()
                 ;
         }
     }

@@ -1,23 +1,51 @@
-﻿using APP.DB.Models;
-using APP.DocsModule.GoogleSheets.Services;
-using APProject.Controllers.Base;
-using Microsoft.AspNetCore.Mvc;
-
-namespace APProject.Controllers.Api
+﻿namespace APProject.Controllers.Api
 {
+    using APP.DocsModule.GoogleSheets.Interfaces;
+    using APP.DocsModule.GoogleSheets.Services;
+    using APProject.Controllers.Base;
+    using Microsoft.AspNetCore.Mvc;
+
     public class GoogleSheetsController : BaseApiController
     {
-        private readonly GoogleSheetsService _googleSheets;
+        private readonly IGoogleSheetsService _googleSheets;
 
-        public GoogleSheetsController(GoogleSheetsService googleSheets)
+        /// <summary>
+        ///     Конструктор.
+        /// </summary>
+        /// <param name="googleSheets"></param>
+        public GoogleSheetsController(IGoogleSheetsService googleSheets)
         {
             _googleSheets = googleSheets;
         }
 
+        /// <summary>
+        ///     Записать в таблицу данные из БД.
+        /// </summary>
         [HttpPost]
         public void CreateSheet()
         {
             _googleSheets.CreateEntry();
+        }
+
+        /// <summary>
+        ///     Получить информацию  из таблицы.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetInformationSheet()
+        {
+            var result = _googleSheets.ReadEntries();
+            return Ok(result);
+        }
+
+        /// <summary>
+        ///     Отчистить таблицу.
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        public IActionResult ClearTable()
+        {
+            return Ok(_googleSheets.DeleteEntry());
         }
     }
 }

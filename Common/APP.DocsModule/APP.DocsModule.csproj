@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="GoogleSheets\Interfaces\" />
     <Folder Include="GoogleSheets\Dto\" />
   </ItemGroup>
 
