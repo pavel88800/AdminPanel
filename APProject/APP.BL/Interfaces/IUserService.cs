@@ -1,7 +1,8 @@
 ﻿namespace APP.BL.Interfaces
 {
-    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using APP.BL.Dto;
+    using APP.DB.Models;
     using APP.Models.Results;
 
     /// <summary>
@@ -13,7 +14,7 @@
         ///     Создать пользователя.
         /// </summary>
         /// <returns></returns>
-        Result CreateUser(UserDto dto);
+        Task<Result> CreateUser(UserDto dto);
 
         /// <summary>
         ///     Редактировать пользователя.
@@ -27,20 +28,20 @@
         /// <param name="offset">отступ.</param>
         /// <param name="count">кол-во.</param>
         /// <returns></returns>
-        List<UserDto> GetUsers(int offset, int count);
+        Task<OffsetEntitiesDto> GetUsers(int offset, int count);
 
         /// <summary>
         ///     Получить пользователя по идентификатору.
         /// </summary>
         /// <param name="id">идентификатор.</param>
         /// <returns></returns>
-        UserDto GetUser(long id);
+        Task<User> GetUser(long id);
 
         /// <summary>
         ///     Удалить пользователя.
         /// </summary>
         /// <param name="id">идентификатор.</param>
         /// <returns></returns>
-        Result DeleteUser(long id);
+        Result DeleteUser(long[] id);
     }
 }

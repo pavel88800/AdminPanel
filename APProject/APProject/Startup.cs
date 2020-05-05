@@ -1,5 +1,6 @@
 using APP.Auth.Interfaces;
 using APP.Auth.Services;
+using APP.DB.Models;
 
 namespace APProject
 {
@@ -70,6 +71,8 @@ namespace APProject
                 .AddScoped<ISearchByKeywordService, SearchByKeywordService>()
                 .AddScoped<IGoogleSheetsService, GoogleSheetsService>()
                 .AddScoped<IGenerateTokenService, GenerateTokenService>()
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<IRoleService, RoleService>()
                 ;
         }
     }
