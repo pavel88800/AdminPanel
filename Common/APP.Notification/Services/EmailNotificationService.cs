@@ -1,6 +1,11 @@
-﻿namespace APP.Notification.Services
+﻿using System;
+using System.Collections.Generic;
+
+namespace APP.Notification.Services
 {
+    using System.Linq;
     using System.Threading.Tasks;
+    using APP.DB;
     using APP.Notification.Interfaces;
     using MailKit.Net.Smtp;
     using MimeKit;
@@ -11,28 +16,64 @@
     /// </summary>
     public class EmailNotificationService : IEmailNotificationService
     {
-        /// <inheritdoc />
-        public async Task SendEmailAsync(string email, string subject, string message)
+        private readonly PanelContext _context;
+
+        /// <summary>
+        ///     Конструктор
+        /// </summary>
+        /// <param name="context">Контекст БД.</param>
+        public EmailNotificationService(PanelContext context)
+        {
+            _context = context;
+        }
+
+        /// <inheritdoc cref="" />
+        public async Task SendEmailAsync(List<string> emails, string subject, string message)
+        {
+            if (emails.Count > 0)
+            {
+                SendMessage(emails, subject, message);
+            }
+        }
+
+        /// <inheritdoc cref="" />
+        public async Task SendEmailUsersAsync(int roleId, string subject, string message)
+        {
+            var usersEmail = _context.Users
+                .Where(x => x.Role.Id == roleId &&  x.Status)
+                .Select(x => x.Email)
+                .ToList();
+
+            if (usersEmail.Count == 0)
+                throw new ApplicationException("Пользователей в этой группе не найдено. Сообщение отправлять некому.");
+
+            SendMessage(usersEmail, subject, message);
+        }
+
+        private async void SendMessage(List<string> emails, string subject, string message) 
         {
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("Администрация сайта", "pavel88800@yandex.ru"));
-            emailMessage.To.Add(new MailboxAddress("", "pavel88800@yandex.ru"));
+
+            foreach (var email in emails)
+                emailMessage.To.Add(new MailboxAddress("", email));
+
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(TextFormat.Html)
             {
-                Text =
-                    $"<!DOCTYPE html ><html xmlns=\"\"><head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /> <meta name=\"viewport\" content=\"width=device-width\"/> <!-- For development, pass document through inliner --> <link rel=\"stylesheet\" href=\"css/simple.css\"> <style type=\"text/css\"> /* Your custom styles go here */ </style></head><body><table class=\"body-wrap\"> <tr> <td class=\"container\"> <!-- Message start --> <table> <tr> <td align=\"center\" class=\"masthead\">  </td> </tr> <tr> <td class=\"content\"> <h2>Здравствуйте!</h2> <p>{message}</p> <table> <tr> <td align=\"center\"> <p> <a href=\"#\" class=\"button\">Share the Awesomeness</a> </p> </td> </tr> </table>  <p><em>– Mr. Pen</em></p> </td> </tr> </table> </td> </tr> <tr> <td class=\"container\"> <!-- Message start --> <table> <tr> <td class=\"content footer\" align=\"center\">  </td> </tr> </table> </td> </tr></table></body></html>"
+                Text = "<h1> Здравствуйте! </h1>" +
+                       $"<p>{message}</p>" +
+                       "<em>- Администрация сайта</em>"
             };
 
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync("smtp.yandex.ru", 25, false);
-                await client.AuthenticateAsync("pavel88800@yandex.ru", "es15102006es");
-                await client.SendAsync(emailMessage);
+            using var client = new SmtpClient();
 
-                await client.DisconnectAsync(true);
-            }
+            await client.ConnectAsync("smtp.yandex.ru", 25, false);
+            await client.AuthenticateAsync("pavel88800@yandex.ru", "es15102006es");
+            await client.SendAsync(emailMessage);
+
+            await client.DisconnectAsync(true);
         }
     }
 }
