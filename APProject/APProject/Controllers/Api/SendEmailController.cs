@@ -1,4 +1,6 @@
-﻿namespace APProject.Controllers.Api
+﻿using System.Collections.Generic;
+
+namespace APProject.Controllers.Api
 {
     using APP.Notification.Interfaces;
     using APProject.Controllers.Base;
@@ -30,9 +32,15 @@
         /// <param name="subject">тема письма</param>
         /// <param name="message">содержимое письма</param>
         [HttpPost]
-        public void Send(string email, string subject, string message)
+        public async void Send(List<string> email, string subject, string message)
         {
-            _notification.SendEmailAsync(email, subject, message);
+            await _notification.SendEmailAsync(email, subject, message);
+        }
+
+        [HttpPost("users")]
+        public async void SendUsers(int roleId,string subject, string message)
+        {
+            await _notification.SendEmailUsersAsync(roleId, subject, message);
         }
     }
 }
