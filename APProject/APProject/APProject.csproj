@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\Common\APP.Auth\APP.Auth.csproj" />
     <ProjectReference Include="..\..\Common\APP.Common\APP.Common.csproj" />
     <ProjectReference Include="..\..\Common\APP.DocsModule\APP.DocsModule.csproj" />
+    <ProjectReference Include="..\..\Common\APP.Notification\APP.Notification.csproj" />
     <ProjectReference Include="..\..\Common\APP.OtherApi\APP.OtherApi.csproj" />
     <ProjectReference Include="..\..\Common\APSwagger\APSwagger.csproj" />
     <ProjectReference Include="..\APP.BL\APP.BL.csproj" />

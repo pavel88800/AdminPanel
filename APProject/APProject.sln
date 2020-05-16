@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APP.OtherApi", "..\Common\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APP.DocsModule", "..\Common\APP.DocsModule\APP.DocsModule.csproj", "{BAF986AB-A6E0-49D9-BF72-BABC93644F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APP.Auth", "..\Common\APP.Auth\APP.Auth.csproj", "{C83E6C50-2260-4930-BE17-3CDD77348D0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APP.Auth", "..\Common\APP.Auth\APP.Auth.csproj", "{C83E6C50-2260-4930-BE17-3CDD77348D0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APP.Notification", "..\Common\APP.Notification\APP.Notification.csproj", "{A0DBBC42-7FF5-4786-81A2-2B91330DA421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{C83E6C50-2260-4930-BE17-3CDD77348D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C83E6C50-2260-4930-BE17-3CDD77348D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C83E6C50-2260-4930-BE17-3CDD77348D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0DBBC42-7FF5-4786-81A2-2B91330DA421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0DBBC42-7FF5-4786-81A2-2B91330DA421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0DBBC42-7FF5-4786-81A2-2B91330DA421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0DBBC42-7FF5-4786-81A2-2B91330DA421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{67FF3ED0-A0A2-42E3-A3E8-5D1BA266EF97} = {1FF9F6E3-5E03-4FC5-AE5E-509535EE0131}
 		{BAF986AB-A6E0-49D9-BF72-BABC93644F64} = {1FF9F6E3-5E03-4FC5-AE5E-509535EE0131}
 		{C83E6C50-2260-4930-BE17-3CDD77348D0F} = {1FF9F6E3-5E03-4FC5-AE5E-509535EE0131}
+		{A0DBBC42-7FF5-4786-81A2-2B91330DA421} = {1FF9F6E3-5E03-4FC5-AE5E-509535EE0131}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B704189-963B-47B5-A5D5-65C5C0FA91EC}
