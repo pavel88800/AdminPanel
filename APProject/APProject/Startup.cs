@@ -2,6 +2,8 @@ using APP.Auth.Interfaces;
 using APP.Auth.Services;
 using APP.Common.Helpers;
 using APP.DB.Models;
+using APP.Notification.Interfaces;
+using APP.Notification.Services;
 
 namespace APProject
 {
@@ -74,6 +76,7 @@ namespace APProject
                 .AddScoped<IGenerateTokenService, GenerateTokenService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IRoleService, RoleService>()
+                .AddScoped<IEmailNotificationService, EmailNotificationService>()
                 ;
         }
     }
