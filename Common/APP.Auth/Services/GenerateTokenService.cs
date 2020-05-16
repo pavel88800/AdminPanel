@@ -63,7 +63,7 @@ namespace APP.Auth.Services
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, person.Login),
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Name)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email)
                 };
 
                 var claimsIdentity =

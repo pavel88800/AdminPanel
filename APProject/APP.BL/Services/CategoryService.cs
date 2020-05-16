@@ -49,7 +49,11 @@ namespace APP.BL.Services
         {
             try
             {
-                var picture = await GetFile(categoryDto.Pictures);
+                var picture = new Picture();
+
+                if (categoryDto.Pictures != null)
+                    picture = await GetFile(categoryDto.Pictures);
+                
                 var parentCategory = _context.Categories.Find(categoryDto.ParentCategoryId);
 
                 var category = new Category

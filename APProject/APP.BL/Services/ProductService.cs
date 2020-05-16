@@ -1,16 +1,16 @@
-﻿namespace APP.BL.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using APP.BL.Dto;
-    using APP.BL.Interfaces;
-    using APP.DB;
-    using APP.DB.Models;
-    using APP.Models.Results;
-    using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using APP.BL.Dto;
+using APP.BL.Interfaces;
+using APP.DB;
+using APP.DB.Models;
+using APP.Models.Results;
+using Microsoft.EntityFrameworkCore;
 
+namespace APP.BL.Services
+{
     /// <summary>
     ///     Сервис по работе с товарами.
     /// </summary>
@@ -46,10 +46,17 @@
         {
             try
             {
-                var picture = await GetFile(productDto.Picture);
-                var listPicture = productDto.Files.Select(file => GetFile(file).Result).ToList();
+                var picture = new Picture();
+                var listPicture = new List<Picture>();
+
+                if (productDto.Picture != null)
+                    picture = await GetFile(productDto.Picture);
+                
+                if (productDto.Files != null && productDto.Files.Count > 0)
+                    listPicture = productDto.Files.Select(file => GetFile(file).Result).ToList();
 
                 var manufacturer = await _context.Manufacturers.FindAsync(productDto.ManufacturerId);
+
                 var listRecomendedProducts = await _context.Products
                     .Where(x => productDto.RecomendedProductsId.Contains(x.Id))
                     .ToListAsync();

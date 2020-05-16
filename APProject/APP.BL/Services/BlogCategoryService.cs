@@ -51,7 +51,11 @@
             {
                 try
                 {
-                    var picture = await GetFile(blogCategoryDto.Picture);
+                    var picture = new Picture();
+
+                    if (blogCategoryDto.Picture != null)
+                        picture = await GetFile(blogCategoryDto.Picture);
+
                     var parentBlogCategory = _context.BlogCategory.Find(blogCategoryDto.BlogCategoryId);
 
                     var blogCategory = GetBlogCategory(blogCategoryDto, picture);

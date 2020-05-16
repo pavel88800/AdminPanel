@@ -1,7 +1,10 @@
 ﻿using System.Threading.Tasks;
 using APP.BL.Dto;
 using APP.BL.Interfaces;
+using APP.Common.Helpers;
+using APP.DB;
 using APProject.Controllers.Base;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APProject.Controllers.Api
@@ -51,6 +54,7 @@ namespace APProject.Controllers.Api
         [HttpPost]
         public async Task<IActionResult> AddUser(UserDto dto)
         {
+           
             var result = await _userService.CreateUser(dto);
             return Ok(result);
         }

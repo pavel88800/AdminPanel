@@ -48,7 +48,10 @@
         {
             try
             {
-                var file = await GetFile(blogArticlesDto.Picture);
+                var file = new Picture();
+
+                if (blogArticlesDto.Picture != null)
+                    file = await GetFile(blogArticlesDto.Picture);
 
                 var recomendedProducts = await _context.Products
                     .Where(x => blogArticlesDto.RecomendedProductsId.Contains(x.Id)).ToListAsync();
