@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\APP.Auth\APP.Auth.csproj" />
+    <ProjectReference Include="..\..\Common\APP.Board\APP.Board.csproj" />
     <ProjectReference Include="..\..\Common\APP.Common\APP.Common.csproj" />
     <ProjectReference Include="..\..\Common\APP.DocsModule\APP.DocsModule.csproj" />
     <ProjectReference Include="..\..\Common\APP.Notification\APP.Notification.csproj" />

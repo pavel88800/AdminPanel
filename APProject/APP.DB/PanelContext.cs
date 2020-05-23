@@ -94,9 +94,28 @@
         public DbSet<Role> Roles { get; set; }
 
         /// <summary>
+        ///     Доски.
+        /// </summary>
+        public DbSet<Boards> Boards { get; set; }
+
+        /// <summary>
+        ///     Карточки.
+        /// </summary>
+        public DbSet<Card> Cards { get; set; }
+
+        /// <summary>
+        ///     Колонки.
+        /// </summary>
+        public DbSet<Column> Columns { get; set; }
+
+        /// <summary>
+        ///     Задачи.
+        /// </summary>
+        public DbSet<Task> Tasks { get; set; }
+
+        /// <summary>
         ///     Инициализация контекста.
         /// </summary>
-        
         public void Init()
         {
             Database.Migrate();

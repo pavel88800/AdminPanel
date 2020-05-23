@@ -1,5 +1,7 @@
 using APP.Auth.Interfaces;
 using APP.Auth.Services;
+using APP.Board.Interfaces;
+using APP.Board.Services;
 using APP.Common.Helpers;
 using APP.DB.Models;
 using APP.Notification.Interfaces;
@@ -77,6 +79,7 @@ namespace APProject
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IRoleService, RoleService>()
                 .AddScoped<IEmailNotificationService, EmailNotificationService>()
+                //.AddScoped<IBoardService, BoardService>()
                 ;
         }
     }
